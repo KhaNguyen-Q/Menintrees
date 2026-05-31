@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 .lovable-extract
+.lovable-extract-v2
 dist
 dist-ssr
 *.local

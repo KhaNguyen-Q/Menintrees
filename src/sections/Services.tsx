@@ -46,15 +46,15 @@ function ServiceCard({
         ref={cardRef}
         href="#contact"
         data-active={active ? "true" : "false"}
-        className="service-card group relative block aspect-[4/5] overflow-hidden border-t border-white/10"
+        className="service-card group relative block aspect-[4/5] overflow-hidden border border-white/[0.07] bg-[#141712]"
       >
         <img
           src={service.image}
           alt={service.title}
-          className="service-card__img absolute inset-0 h-full w-full object-cover opacity-0 transition-all duration-[1200ms] ease-out group-hover:scale-105 group-hover:opacity-100"
+          className="service-card__img absolute inset-0 h-full w-full object-cover opacity-[0.32] saturate-[0.85] transition-all duration-[1200ms] ease-out group-hover:scale-105 group-hover:opacity-100 group-hover:saturate-100"
           loading="lazy"
         />
-        <div className="service-card__scrim absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-[#0a0a0a]/60 to-[#0a0a0a]/95 transition-opacity duration-700 group-hover:from-black/30 group-hover:via-black/40 group-hover:to-black/80" />
+        <div className="service-card__scrim absolute inset-0 bg-gradient-to-b from-[#0c0e0b]/55 via-[#0a0a0a]/75 to-[#0a0a0a]/92 transition-opacity duration-700 group-hover:from-black/30 group-hover:via-black/40 group-hover:to-black/80" />
 
         <div className="relative z-10 flex h-full flex-col justify-between p-8">
           <div className="flex items-start justify-between">
@@ -85,12 +85,12 @@ function ServiceCard({
 
 export function Services() {
   return (
-    <section id="services" className="bg-[#0a0a0a] py-32 md:py-48">
+    <section id="services" className="section-canopy-deep section-divider-top py-32 md:py-48">
       <div className="mx-auto max-w-7xl px-6 md:px-12">
         <div className="mb-16 grid grid-cols-12 gap-8">
           <Reveal className="col-span-12 md:col-span-3">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#a8b89a]">
-              — Capabilities
+            <p className="text-xl uppercase tracking-[0.3em] text-[#a8b89a]">
+              — Services
             </p>
           </Reveal>
           <Reveal className="col-span-12 md:col-span-9" delay={120}>
@@ -100,7 +100,7 @@ export function Services() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 gap-px bg-white/10 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
           {ASSETS.services.map((s, i) => (
             <ServiceCard key={s.id} service={s} index={i} />
           ))}

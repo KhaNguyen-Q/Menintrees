@@ -3,10 +3,10 @@ import { BackgroundVideo, Reveal } from "./_shared";
 
 export function Philosophy() {
   return (
-    <section id="philosophy" className="relative bg-[#0a0a0a] py-32 md:py-48">
+    <section id="philosophy" className="section-canopy section-divider-top relative py-32 md:py-48">
       <div className="mx-auto grid max-w-7xl grid-cols-12 gap-8 px-6 md:px-12">
         <Reveal className="col-span-12 md:col-span-7">
-          <p className="mb-10 text-xs uppercase tracking-[0.3em] text-[#a8b89a]">
+          <p className="mb-10 text-xl uppercase tracking-[0.3em] text-[#a8b89a]">
             — Our Philosophy
           </p>
           <h2 className="font-display text-balance text-4xl leading-[1.05] text-[#f5f3ee] md:text-7xl">

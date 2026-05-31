@@ -1,4 +1,4 @@
-import { Leaf, TreePine, Scissors, Axe } from "lucide-react";
+import { Leaf, TreePine, Scissors, Axe, Instagram, Facebook } from "lucide-react";
 
 /* ============================================================
    VISUAL ASSETS — edit these paths to swap in your own files.
@@ -7,34 +7,54 @@ import { Leaf, TreePine, Scissors, Axe } from "lucide-react";
 export const ASSETS = {
   brand: {
     name: "Men in Trees",
-    tagline: "Arboriculture · Est. 1998",
+    tagline: "Arboriculture · Est. 2026",
   },
   nav: {
     /* Swap this URL to change the menu background image */
     backgroundImage:
       "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=80",
   },
+  contact: {
+    address: "38 Woods Bay Lane, The Archipelago, ON, Canada",
+    phone: "705-774-4656",
+    phoneHref: "tel:+17057744656",
+    email: "Booking@menintree.info",
+    emailHref: "mailto:Booking@menintree.info",
+    areas: ["Woods Bay", "Georgian Bay", "Muskoka", "Bracebridge", "MacTier"],
+  },
+  socials: [
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/men_in_trees1",
+      icon: Instagram,
+    },
+    {
+      label: "Facebook",
+      href: "https://www.facebook.com/men.in.trees2025",
+      icon: Facebook,
+    },
+  ],
   hero: {
     video: "/videos/hero.mp4",
-    poster:
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2400&q=80",
+    /* Local poster frame extracted from the start of the hero video — shows instantly while the video lazy-loads. */
+    poster: "/videos/hero-poster.jpg",
   },
   philosophy: {
     video:
       "https://cdn.coverr.co/videos/coverr-a-forest-in-the-morning-fog-7307/1080p.mp4",
     poster:
-      "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1600&q=80",
+      "/images/Riding.jpg",
   },
   services: [
     {
       id: "preservation",
-      title: "Tree Preservation",
+      title: "Preventative Maintenance",
       number: "01",
       icon: Leaf,
       blurb:
         "Long-horizon stewardship plans for heritage specimens and protected canopies.",
       image:
-        "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1800&q=80",
+        "/images/Preventativemaintenance.avif",
     },
     {
       id: "removal",
@@ -42,9 +62,9 @@ export const ASSETS = {
       number: "02",
       icon: Axe,
       blurb:
-        "Engineered dismantling of high-risk trees in constrained estate environments.",
+        "Our professional arborists specialize in safe and efficient tree removal.",
       image:
-        "https://images.unsplash.com/photo-1473773508845-188df298d2d1?auto=format&fit=crop&w=1800&q=80",
+        "/images/Removal.png",
     },
     {
       id: "pruning",
@@ -52,9 +72,9 @@ export const ASSETS = {
       number: "03",
       icon: Scissors,
       blurb:
-        "Precision cuts informed by biomechanics and the long arc of canopy form.",
+        "Proper tree pruning is essential for the health and aesthetics of your trees.",
       image:
-        "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?auto=format&fit=crop&w=1800&q=80",
+        "/images/Prune2.jpeg",
     },
     {
       id: "consulting",
@@ -64,13 +84,13 @@ export const ASSETS = {
       blurb:
         "Reports, risk assessments, and development advisory for architects and estates.",
       image:
-        "https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&w=1800&q=80",
+        "/images/Softscaping.avif",
     },
   ],
   portfolio: [
-    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1473773508845-188df298d2d1?auto=format&fit=crop&w=1600&q=80",
+    "/images/Mitch.jpg",
+    "/images/Prune.png",
+    "/images/Topview.jpg",
   ],
 } as const;
 

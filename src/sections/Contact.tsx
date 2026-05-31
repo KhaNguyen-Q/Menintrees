@@ -5,7 +5,7 @@ import {
   CheckCircle2,
   AlertCircle,
 } from "lucide-react";
-import { SERVICE_OPTIONS } from "./assets";
+import { ASSETS, SERVICE_OPTIONS } from "./assets";
 import { BackgroundImage, Reveal } from "./_shared";
 
 type FormState = {
@@ -60,19 +60,19 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-[#0a0a0a] py-32 md:py-48"
+      className="section-canopy section-divider-top relative overflow-hidden py-32 md:py-48"
     >
-      <div className="pointer-events-none absolute inset-0 opacity-40">
+      <div className="pointer-events-none absolute inset-0 opacity-60">
         <BackgroundImage
           src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=80"
           className="h-full w-full"
-          overlayClassName="bg-[#0a0a0a]/80"
+          overlayClassName="bg-[#0a0a0a]/70"
         />
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl grid-cols-12 gap-y-12 gap-x-6 px-6 md:gap-x-12 md:px-12">
-        <Reveal className="col-span-12 min-w-0 md:col-span-5">
-          <p className="mb-8 text-xs uppercase tracking-[0.3em] text-[#a8b89a]">
+      <div className="relative mx-auto max-w-7xl grid grid-cols-12 gap-y-12 gap-x-6 px-6 md:gap-x-12 md:px-12">
+        <Reveal className="order-1 col-span-12 min-w-0 md:col-span-5 md:row-start-1">
+          <p className="mb-8 text-xl uppercase tracking-[0.3em] text-[#a8b89a]">
             — Request a Consultation
           </p>
           <h2 className="font-display text-balance text-4xl leading-[1.05] text-[#f5f3ee] md:text-6xl">
@@ -85,10 +85,10 @@ export function ContactSection() {
           </p>
         </Reveal>
 
-        <Reveal className="col-span-12 min-w-0 md:col-span-7" delay={150}>
+        <Reveal className="order-2 col-span-12 min-w-0 md:col-span-7 md:col-start-6 md:row-start-1 md:row-span-2" delay={250}>
           <form
             onSubmit={handleSubmit}
-            className="w-full max-w-full space-y-8 border border-white/10 bg-black/40 p-6 backdrop-blur sm:p-8 md:p-12"
+            className="w-full max-w-full space-y-8 border border-white/20 bg-black/70 p-6 backdrop-blur sm:p-8 md:p-12"
             noValidate
 
           >
@@ -177,6 +177,69 @@ export function ContactSection() {
               </div>
             </div>
           </form>
+        </Reveal>
+
+        <Reveal className="order-3 col-span-12 min-w-0 md:col-span-5 md:row-start-2" delay={80}>
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2">
+            <div>
+              <p className="mb-5 text-lg uppercase tracking-[0.3em] text-[#a8b89a]">
+                Contact Details
+              </p>
+              <address className="not-italic space-y-3 text-sm leading-relaxed text-[#f5f3ee]/80">
+                <p className="text-[#f5f3ee]/60">{ASSETS.contact.address}</p>
+                <p>
+                  <a
+                    href={ASSETS.contact.phoneHref}
+                    className="transition-colors hover:text-[#a8b89a]"
+                  >
+                    {ASSETS.contact.phone}
+                  </a>
+                </p>
+                <p>
+                  <a
+                    href={ASSETS.contact.emailHref}
+                    className="break-all transition-colors hover:text-[#a8b89a]"
+                  >
+                    {ASSETS.contact.email}
+                  </a>
+                </p>
+              </address>
+            </div>
+
+            <div>
+              <p className="mb-5 text-lg uppercase tracking-[0.3em] text-[#a8b89a]">
+                Areas Covered
+              </p>
+              <ul className="space-y-2 text-base text-[#f5f3ee]/80">
+                {ASSETS.contact.areas.map((area) => (
+                  <li key={area}>{area}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-12">
+            <p className="mb-5 text-xl uppercase tracking-[0.3em] text-[#a8b89a]">
+              Socials
+            </p>
+            <div className="flex items-center gap-3">
+              {ASSETS.socials.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="inline-flex h-11 w-11 items-center justify-center border border-[#f5f3ee]/20 text-[#f5f3ee]/70 transition-all hover:border-[#a8b89a] hover:text-[#a8b89a]"
+                  >
+                    <Icon size={30} strokeWidth={1.5} />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
         </Reveal>
       </div>
 

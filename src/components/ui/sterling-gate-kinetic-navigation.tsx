@@ -29,10 +29,10 @@ export function KineticNav({ brand, links }: KineticNavProps) {
     try {
       if (!gsap.parseEase("main")) {
         CustomEase.create("main", "0.65, 0.01, 0.05, 0.99");
-        gsap.defaults({ ease: "main", duration: 0.7 });
+        gsap.defaults({ ease: "main", duration: 0.6 });
       }
     } catch {
-      gsap.defaults({ ease: "power2.out", duration: 0.7 });
+      gsap.defaults({ ease: "power2.out", duration: 0.6 });
     }
   }, []);
 
@@ -137,59 +137,71 @@ export function KineticNav({ brand, links }: KineticNavProps) {
 
   return (
     <div ref={containerRef} className="pointer-events-none fixed inset-0 z-50">
-      {/* Top bar — slides up on scroll down, slides down on scroll up */}
+      {/* Top bar — pointer-events pass through when menu open so links beneath stay clickable */}
       <div
-        className={`pointer-events-auto relative z-[60] flex items-center justify-between gap-6 px-6 py-6 transition-transform duration-500 ease-[cubic-bezier(0.65,0.01,0.05,0.99)] md:px-12 md:py-8 ${
+        className={`relative z-[60] flex items-center justify-between gap-6 px-6 py-6 transition-transform duration-500 ease-[cubic-bezier(0.65,0.01,0.05,0.99)] md:px-12 md:py-8 ${
           hidden ? "-translate-y-full" : "translate-y-0"
-        }`}
+        } ${isOpen ? "pointer-events-none" : "pointer-events-auto"}`}
       >
-        {/* Brand wordmark on the left */}
+        {/* Brand wordmark on the left — closes menu when open, scrolls to top when closed */}
         <a
           href="#top"
-          className="font-display text-lg tracking-[0.18em] text-[#f5f3ee] uppercase"
+          onClick={(e) => {
+            if (isOpen) {
+              e.preventDefault();
+              setIsOpen(false);
+            }
+          }}
+          className="pointer-events-auto font-display text-xl tracking-[0.18em] text-[#f5f3ee] uppercase md:text-2xl lg:text-3xl"
         >
           {brand}
         </a>
 
         {/* 3D shiny logo on the right — toggles the navigation overlay */}
-        <LogoButton
-          onClick={() => setIsOpen((v) => !v)}
-          isOpen={isOpen}
-          size={56}
-          ariaLabel={isOpen ? "Close menu" : "Open menu"}
-        />
+        <div className="pointer-events-auto">
+          <LogoButton
+            onClick={() => setIsOpen((v) => !v)}
+            isOpen={isOpen}
+            size={96}
+            ariaLabel={isOpen ? "Close menu" : "Open menu"}
+          />
+        </div>
       </div>
 
       {/* Overlay menu */}
       <div
-        className="nav-overlay-wrapper fixed inset-0"
+        className="nav-overlay-wrapper pointer-events-auto fixed inset-0"
         style={{ display: "none" }}
         data-nav="closed"
       >
         <div
-          className="overlay absolute inset-0 bg-black/40 backdrop-blur-sm"
+          className="overlay pointer-events-auto absolute inset-0 bg-black/40 backdrop-blur-sm"
           onClick={() => setIsOpen(false)}
+          aria-hidden="true"
           style={{ opacity: 0 }}
         />
 
-        <div className="menu-content pointer-events-auto absolute inset-y-0 right-0 flex w-full max-w-md flex-col md:max-w-lg">
+        <div
+          className="menu-content pointer-events-auto absolute inset-y-0 right-0 flex w-full max-w-md flex-col md:max-w-lg"
+          onClick={(e) => e.stopPropagation()}
+        >
           {/* Dark seamless background image — swap URL in src/sections/assets.ts */}
           <div
-            className="backdrop-layer absolute inset-0 bg-cover bg-center"
+            className="backdrop-layer pointer-events-none absolute inset-0 bg-cover bg-center"
             style={{
               backgroundImage: `url(${ASSETS.nav.backgroundImage})`,
             }}
           />
-          <div className="backdrop-layer absolute inset-0 bg-[#0a0a0a]/80" />
+          <div className="backdrop-layer pointer-events-none absolute inset-0 bg-[#0a0a0a]/80" />
 
-          <nav className="relative flex h-full flex-col justify-between px-8 pt-28 pb-12 md:px-14">
-            <ul className="space-y-2">
+          <nav className="relative z-10 flex h-full flex-col justify-between px-8 pt-28 pb-12 md:px-14">
+            <ul className="space-y-12">
               {links.map((l, i) => (
                 <li key={l.href} className="overflow-hidden">
                   <a
                     href={l.href}
                     onClick={() => setIsOpen(false)}
-                    className="nav-link group flex items-baseline gap-4 font-display text-4xl text-[#f5f3ee] transition-colors hover:text-[#a8b89a] md:text-5xl"
+                    className="nav-link group relative flex items-baseline gap-4 font-display text-4xl text-[#f5f3ee] transition-colors hover:text-[#a8b89a] md:text-5xl"
                   >
                     <span className="text-xs uppercase tracking-[0.3em] text-[#a8b89a]/70">
                       0{i + 1}
@@ -200,9 +212,34 @@ export function KineticNav({ brand, links }: KineticNavProps) {
               ))}
             </ul>
 
-            <div className="flex items-end justify-between text-[10px] uppercase tracking-[0.3em] text-[#f5f3ee]/50">
-              <span className="nav-footer-label">Est. 2025</span>
-              <span className="nav-footer-label">Arboriculture</span>
+            <div className="space-y-6">
+              <div className="nav-footer-label">
+                <p className="mb-5 text-[10px] uppercase tracking-[0.3em] text-[#a8b89a]">
+                  Socials
+                </p>
+                <div className="flex items-center gap-5">
+                  {ASSETS.socials.map((s) => {
+                    const Icon = s.icon;
+                    return (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={s.label}
+                        className="inline-flex h-11 w-11 items-center justify-center border border-[#f5f3ee]/20 text-[#f5f3ee]/70 transition-all hover:border-[#a8b89a] hover:text-[#a8b89a]"
+                      >
+                        <Icon size={30} strokeWidth={1.5} />
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="flex items-end justify-between text-[10px] uppercase tracking-[0.3em] text-[#f5f3ee]/50">
+                <span className="nav-footer-label">Est. 2026</span>
+                <span className="nav-footer-label">Arboriculture</span>
+              </div>
             </div>
           </nav>
         </div>
